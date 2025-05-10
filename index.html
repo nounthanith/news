@@ -1,248 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>News Dashboard</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    .news-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-    .skeleton {
-      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-  </style>
-</head>
-<body class="bg-gray-50 min-h-screen">
-  <!-- Header -->
-  <header class="bg-blue-800 text-white shadow-lg">
-    <div class="container mx-auto px-4 py-6">
-      <div class="flex flex-col md:flex-row justify-between items-center">
-        <div class="flex items-center mb-4 md:mb-0">
-          <i class="fas fa-newspaper text-2xl mr-3"></i>
-          <h1 class="text-2xl font-bold">Global News Hub</h1>
-        </div>
-        <div class="w-full md:w-1/3">
-          <div class="relative">
-            <input 
-              type="text" 
-              id="search-input" 
-              placeholder="Search for news..." 
-              class="w-full px-4 py-2 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-            <button id="search-btn" class="absolute right-3 top-2 text-blue-800">
-              <i class="fas fa-search"></i>
-            </button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      .news-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+      .skeleton {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-blue-800 text-white shadow-lg">
+      <div class="container mx-auto px-4 py-6">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="flex items-center mb-4 md:mb-0">
+            <i class="fas fa-newspaper text-2xl mr-3"></i>
+            <h1 class="text-2xl font-bold">Global News Hub</h1>
+          </div>
+          <div class="w-full md:w-1/3">
+            <div class="relative">
+              <input
+                type="text"
+                id="search-input"
+                placeholder="Search for news..."
+                class="w-full px-4 py-2 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <button
+                id="search-btn"
+                class="absolute right-3 top-2 text-blue-800"
+              >
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <!-- Main Content -->
-  <main class="container mx-auto px-4 py-8">
-    <!-- Category Filters -->
-    <div class="mb-8 overflow-x-auto">
-      <div class="flex space-x-2 pb-2">
-        <button 
-          data-category="general" 
-          class="category-btn px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium whitespace-nowrap hover:bg-blue-200 active:bg-blue-300"
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+      <!-- Category Filters -->
+      <div class="mb-8 overflow-x-auto">
+        <div class="flex space-x-2 pb-2">
+          <button
+            data-category="general"
+            class="category-btn px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium whitespace-nowrap hover:bg-blue-200 active:bg-blue-300"
+          >
+            <i class="fas fa-globe mr-2"></i>General
+          </button>
+          <button
+            data-category="business"
+            class="category-btn px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium whitespace-nowrap hover:bg-blue-200 active:bg-blue-300"
+          >
+            <i class="fas fa-briefcase mr-2"></i>Business
+          </button>
+          <button
+            data-category="technology"
+            class="category-btn px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium whitespace-nowrap hover:bg-blue-200 active:bg-blue-300"
+          >
+            <i class="fas fa-microchip mr-2"></i>Technology
+          </button>
+          <button
+            data-category="health"
+            class="category-btn px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium whitespace-nowrap hover:bg-blue-200 active:bg-blue-300"
+          >
+            <i class="fas fa-heartbeat mr-2"></i>Health
+          </button>
+          <button
+            data-category="science"
+            class="category-btn px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium whitespace-nowrap hover:bg-blue-200 active:bg-blue-300"
+          >
+            <i class="fas fa-flask mr-2"></i>Science
+          </button>
+          <button
+            data-category="sports"
+            class="category-btn px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium whitespace-nowrap hover:bg-blue-200 active:bg-blue-300"
+          >
+            <i class="fas fa-running mr-2"></i>Sports
+          </button>
+          <button
+            data-category="entertainment"
+            class="category-btn px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium whitespace-nowrap hover:bg-blue-200 active:bg-blue-300"
+          >
+            <i class="fas fa-film mr-2"></i>Entertainment
+          </button>
+        </div>
+      </div>
+
+      <!-- Loading Skeleton -->
+      <div
+        id="loading-skeleton"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        <!-- Skeleton cards will be inserted here by JavaScript -->
+      </div>
+
+      <!-- News Articles Container -->
+      <div
+        id="news-container"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        <!-- News cards will be inserted here by JavaScript -->
+      </div>
+
+      <!-- Load More Button -->
+      <div class="text-center mt-8">
+        <button
+          id="load-more"
+          class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 hidden"
         >
-          <i class="fas fa-globe mr-2"></i>General
-        </button>
-        <button 
-          data-category="business" 
-          class="category-btn px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium whitespace-nowrap hover:bg-blue-200 active:bg-blue-300"
-        >
-          <i class="fas fa-briefcase mr-2"></i>Business
-        </button>
-        <button 
-          data-category="technology" 
-          class="category-btn px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium whitespace-nowrap hover:bg-blue-200 active:bg-blue-300"
-        >
-          <i class="fas fa-microchip mr-2"></i>Technology
-        </button>
-        <button 
-          data-category="health" 
-          class="category-btn px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium whitespace-nowrap hover:bg-blue-200 active:bg-blue-300"
-        >
-          <i class="fas fa-heartbeat mr-2"></i>Health
-        </button>
-        <button 
-          data-category="science" 
-          class="category-btn px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium whitespace-nowrap hover:bg-blue-200 active:bg-blue-300"
-        >
-          <i class="fas fa-flask mr-2"></i>Science
-        </button>
-        <button 
-          data-category="sports" 
-          class="category-btn px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium whitespace-nowrap hover:bg-blue-200 active:bg-blue-300"
-        >
-          <i class="fas fa-running mr-2"></i>Sports
-        </button>
-        <button 
-          data-category="entertainment" 
-          class="category-btn px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium whitespace-nowrap hover:bg-blue-200 active:bg-blue-300"
-        >
-          <i class="fas fa-film mr-2"></i>Entertainment
+          Load More Articles
         </button>
       </div>
-    </div>
 
-    <!-- Loading Skeleton -->
-    <div id="loading-skeleton" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Skeleton cards will be inserted here by JavaScript -->
-    </div>
+      <!-- Error Message -->
+      <div id="error-message" class="text-center py-10 hidden">
+        <i
+          class="fas fa-exclamation-triangle text-4xl text-yellow-500 mb-4"
+        ></i>
+        <h3 class="text-xl font-semibold text-gray-700">
+          Failed to load news articles
+        </h3>
+        <p class="text-gray-500 mt-2">
+          Please check your internet connection or try again later.
+        </p>
+        <button
+          id="retry-btn"
+          class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        >
+          Retry
+        </button>
+      </div>
+    </main>
 
-    <!-- News Articles Container -->
-    <div id="news-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- News cards will be inserted here by JavaScript -->
-    </div>
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+      <div class="container mx-auto px-4 text-center">
+        <p>Powered by NewsAPI.org</p>
+        <p class="mt-2 text-gray-400 text-sm">
+          Data updates every time you refresh the page
+        </p>
+      </div>
+    </footer>
 
-    <!-- Load More Button -->
-    <div class="text-center mt-8">
-      <button 
-        id="load-more" 
-        class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 hidden"
-      >
-        Load More Articles
-      </button>
-    </div>
+    <script>
+      // Configuration
+      const API_KEY = "a580da4e07d043c0b11b97554657f8ba"; // Replace with your actual NewsAPI key
+      const today = new Date().toISOString().split("T")[0];
+      let currentPage = 1;
+      let currentCategory = "general";
+      let currentQuery = "";
 
-    <!-- Error Message -->
-    <div id="error-message" class="text-center py-10 hidden">
-      <i class="fas fa-exclamation-triangle text-4xl text-yellow-500 mb-4"></i>
-      <h3 class="text-xl font-semibold text-gray-700">Failed to load news articles</h3>
-      <p class="text-gray-500 mt-2">Please check your internet connection or try again later.</p>
-      <button id="retry-btn" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-        Retry
-      </button>
-    </div>
-  </main>
+      // DOM Elements
+      const newsContainer = document.getElementById("news-container");
+      const loadingSkeleton = document.getElementById("loading-skeleton");
+      const loadMoreBtn = document.getElementById("load-more");
+      const errorMessage = document.getElementById("error-message");
+      const retryBtn = document.getElementById("retry-btn");
+      const searchInput = document.getElementById("search-input");
+      const searchBtn = document.getElementById("search-btn");
+      const categoryBtns = document.querySelectorAll(".category-btn");
 
-  <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-8">
-    <div class="container mx-auto px-4 text-center">
-      <p>Powered by NewsAPI.org</p>
-      <p class="mt-2 text-gray-400 text-sm">Data updates every time you refresh the page</p>
-    </div>
-  </footer>
+      // Initialize the app
+      document.addEventListener("DOMContentLoaded", () => {
+        showSkeletonLoader();
+        fetchNews();
 
-  <script>
-    // Configuration
-    const API_KEY = 'a580da4e07d043c0b11b97554657f8ba'; // Replace with your actual NewsAPI key
-    let currentPage = 1;
-    let currentCategory = 'general';
-    let currentQuery = '';
-
-    // DOM Elements
-    const newsContainer = document.getElementById('news-container');
-    const loadingSkeleton = document.getElementById('loading-skeleton');
-    const loadMoreBtn = document.getElementById('load-more');
-    const errorMessage = document.getElementById('error-message');
-    const retryBtn = document.getElementById('retry-btn');
-    const searchInput = document.getElementById('search-input');
-    const searchBtn = document.getElementById('search-btn');
-    const categoryBtns = document.querySelectorAll('.category-btn');
-
-    // Initialize the app
-    document.addEventListener('DOMContentLoaded', () => {
-      showSkeletonLoader();
-      fetchNews();
-      
-      // Event listeners
-      loadMoreBtn.addEventListener('click', loadMoreArticles);
-      retryBtn.addEventListener('click', fetchNews);
-      searchBtn.addEventListener('click', performSearch);
-      searchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') performSearch();
-      });
-      
-      categoryBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          // Update active category
-          categoryBtns.forEach(b => b.classList.remove('bg-blue-300', 'text-blue-900'));
-          btn.classList.add('bg-blue-300', 'text-blue-900');
-          
-          currentCategory = btn.dataset.category;
-          currentPage = 1;
-          currentQuery = '';
-          searchInput.value = '';
-          showSkeletonLoader();
-          fetchNews();
+        // Event listeners
+        loadMoreBtn.addEventListener("click", loadMoreArticles);
+        retryBtn.addEventListener("click", fetchNews);
+        searchBtn.addEventListener("click", performSearch);
+        searchInput.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") performSearch();
         });
+
+        categoryBtns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            // Update active category
+            categoryBtns.forEach((b) =>
+              b.classList.remove("bg-blue-300", "text-blue-900")
+            );
+            btn.classList.add("bg-blue-300", "text-blue-900");
+
+            currentCategory = btn.dataset.category;
+            currentPage = 1;
+            currentQuery = "";
+            searchInput.value = "";
+            showSkeletonLoader();
+            fetchNews();
+          });
+        });
+
+        // Set general as default active category
+        document
+          .querySelector('[data-category="general"]')
+          .classList.add("bg-blue-300", "text-blue-900");
       });
-      
-      // Set general as default active category
-      document.querySelector('[data-category="general"]').classList.add('bg-blue-300', 'text-blue-900');
-    });
 
-    // Fetch news from NewsAPI
-    async function fetchNews() {
-      try {
-        hideError();
-        let url;
-        
-        if (currentQuery) {
-          url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(currentQuery)}&page=${currentPage}&apiKey=${API_KEY}`;
-        } else {
-          url = `https://newsapi.org/v2/top-headlines?category=${currentCategory}&country=us&page=${currentPage}&apiKey=${API_KEY}`;
-        }
-        
-        const response = await fetch(url);
-        const data = await response.json();
-        
-        if (data.status === 'ok') {
-          if (currentPage === 1) {
-            newsContainer.innerHTML = '';
-          }
-          
-          displayNews(data.articles);
-          
-          // Show/hide load more button
-          if (data.articles.length >= 20) {
-            loadMoreBtn.classList.remove('hidden');
+      // Fetch news from NewsAPI
+      async function fetchNews() {
+        try {
+          hideError();
+          let url;
+          if (currentQuery && currentQuery.trim() !== "") {
+            url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(
+              currentQuery
+            )}&from=${today}&page=${currentPage}&apiKey=${API_KEY}`;
           } else {
-            loadMoreBtn.classList.add('hidden');
+            url = `https://newsapi.org/v2/top-headlines?category=${
+              currentCategory || "general"
+            }&country=us&page=${currentPage}&apiKey=${API_KEY}`;
           }
-        } else {
-          throw new Error(data.message || 'Failed to fetch news');
-        }
-      } catch (error) {
-        console.error('Error fetching news:', error);
-        showError();
-      } finally {
-        hideSkeletonLoader();
-      }
-    }
 
-    // Display news articles
-    function displayNews(articles) {
-      if (!articles || articles.length === 0) {
-        newsContainer.innerHTML = `
+          const response = await fetch(url);
+          const data = await response.json();
+
+          if (data.status === "ok") {
+            if (currentPage === 1) {
+              newsContainer.innerHTML = "";
+            }
+
+            displayNews(data.articles);
+
+            // Show/hide load more button
+            if (data.articles.length >= 20) {
+              loadMoreBtn.classList.remove("hidden");
+            } else {
+              loadMoreBtn.classList.add("hidden");
+            }
+          } else {
+            throw new Error(data.message || "Failed to fetch news");
+          }
+        } catch (error) {
+          console.error("Error fetching news:", error);
+          showError();
+        } finally {
+          hideSkeletonLoader();
+        }
+      }
+
+      // Display news articles
+      function displayNews(articles) {
+        if (!articles || articles.length === 0) {
+          newsContainer.innerHTML = `
           <div class="col-span-full text-center py-10">
             <i class="fas fa-newspaper text-4xl text-gray-300 mb-4"></i>
             <h3 class="text-xl font-semibold text-gray-700">No articles found</h3>
             <p class="text-gray-500 mt-2">Try a different search term or category</p>
           </div>
         `;
-        return;
-      }
-      
-      articles.forEach(article => {
-        const newsCard = document.createElement('div');
-        newsCard.className = 'news-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:cursor-pointer';
-        newsCard.innerHTML = `
+          return;
+        }
+
+        articles.forEach((article) => {
+          const newsCard = document.createElement("div");
+          newsCard.className =
+            "news-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:cursor-pointer";
+          newsCard.innerHTML = `
           <div class="h-48 overflow-hidden">
             <img 
-              src="${article.urlToImage || 'https://via.placeholder.com/400x200?text=No+Image'}" 
+              src="${
+                article.urlToImage ||
+                "https://via.placeholder.com/400x200?text=No+Image"
+              }" 
               alt="${article.title}" 
               class="w-full h-full object-cover"
               onerror="this.src='https://via.placeholder.com/400x200?text=No+Image'"
@@ -251,14 +291,18 @@
           <div class="p-4">
             <div class="flex justify-between items-start mb-2">
               <span class="text-xs font-semibold px-2 py-1 bg-blue-100 text-blue-800 rounded">
-                ${article.source.name || 'Unknown'}
+                ${article.source.name || "Unknown"}
               </span>
               <span class="text-xs text-gray-500">
                 ${new Date(article.publishedAt).toLocaleDateString()}
               </span>
             </div>
-            <h3 class="font-bold text-lg mb-2 line-clamp-2">${article.title}</h3>
-            <p class="text-gray-600 text-sm mb-4 line-clamp-3">${article.description || 'No description available'}</p>
+            <h3 class="font-bold text-lg mb-2 line-clamp-2">${
+              article.title
+            }</h3>
+            <p class="text-gray-600 text-sm mb-4 line-clamp-3">${
+              article.description || "No description available"
+            }</p>
             <a 
               href="${article.url}" 
               target="_blank" 
@@ -269,17 +313,18 @@
             </a>
           </div>
         `;
-        newsContainer.appendChild(newsCard);
-      });
-    }
+          newsContainer.appendChild(newsCard);
+        });
+      }
 
-    // Show skeleton loader
-    function showSkeletonLoader() {
-      loadingSkeleton.innerHTML = '';
-      for (let i = 0; i < 6; i++) {
-        const skeletonCard = document.createElement('div');
-        skeletonCard.className = 'bg-white rounded-lg shadow-md overflow-hidden';
-        skeletonCard.innerHTML = `
+      // Show skeleton loader
+      function showSkeletonLoader() {
+        loadingSkeleton.innerHTML = "";
+        for (let i = 0; i < 6; i++) {
+          const skeletonCard = document.createElement("div");
+          skeletonCard.className =
+            "bg-white rounded-lg shadow-md overflow-hidden";
+          skeletonCard.innerHTML = `
           <div class="h-48 bg-gray-200 skeleton"></div>
           <div class="p-4">
             <div class="h-4 bg-gray-200 rounded skeleton mb-3 w-1/3"></div>
@@ -289,51 +334,53 @@
             <div class="h-4 bg-gray-200 rounded skeleton w-1/4 mt-4"></div>
           </div>
         `;
-        loadingSkeleton.appendChild(skeletonCard);
+          loadingSkeleton.appendChild(skeletonCard);
+        }
+        loadingSkeleton.classList.remove("hidden");
+        newsContainer.classList.add("hidden");
       }
-      loadingSkeleton.classList.remove('hidden');
-      newsContainer.classList.add('hidden');
-    }
 
-    // Hide skeleton loader
-    function hideSkeletonLoader() {
-      loadingSkeleton.classList.add('hidden');
-      newsContainer.classList.remove('hidden');
-    }
+      // Hide skeleton loader
+      function hideSkeletonLoader() {
+        loadingSkeleton.classList.add("hidden");
+        newsContainer.classList.remove("hidden");
+      }
 
-    // Show error message
-    function showError() {
-      errorMessage.classList.remove('hidden');
-      newsContainer.classList.add('hidden');
-      loadingSkeleton.classList.add('hidden');
-      loadMoreBtn.classList.add('hidden');
-    }
+      // Show error message
+      function showError() {
+        errorMessage.classList.remove("hidden");
+        newsContainer.classList.add("hidden");
+        loadingSkeleton.classList.add("hidden");
+        loadMoreBtn.classList.add("hidden");
+      }
 
-    // Hide error message
-    function hideError() {
-      errorMessage.classList.add('hidden');
-    }
+      // Hide error message
+      function hideError() {
+        errorMessage.classList.add("hidden");
+      }
 
-    // Load more articles
-    function loadMoreArticles() {
-      currentPage++;
-      fetchNews();
-    }
-
-    // Perform search
-    function performSearch() {
-      const query = searchInput.value.trim();
-      if (query) {
-        currentQuery = query;
-        currentPage = 1;
-        currentCategory = '';
-        showSkeletonLoader();
+      // Load more articles
+      function loadMoreArticles() {
+        currentPage++;
         fetchNews();
-        
-        // Reset category buttons
-        categoryBtns.forEach(b => b.classList.remove('bg-blue-300', 'text-blue-900'));
       }
-    }
-  </script>
-</body>
+
+      // Perform search
+      function performSearch() {
+        const query = searchInput.value.trim();
+        if (query) {
+          currentQuery = query;
+          currentPage = 1;
+          currentCategory = "";
+          showSkeletonLoader();
+          fetchNews();
+
+          // Reset category buttons
+          categoryBtns.forEach((b) =>
+            b.classList.remove("bg-blue-300", "text-blue-900")
+          );
+        }
+      }
+    </script>
+  </body>
 </html>
